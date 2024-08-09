@@ -1,30 +1,29 @@
 from kafka import KafkaProducer
 import json
-import pandas as pd
+import random
 import time
-
-file_path = '/myhadoop/dataset_sismique(1).csv'
-data = pd.read_csv(file_path)
+from datetime import datetime
 
 producer = KafkaProducer(
     bootstrap_servers='kafka:9092',
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
-topic_name = 'topic1'
+topic_name = 'bitcoin_topic'
 
 try:
     while True:
-        for index, row in data.iterrows():
-            message = {
-                "timestamp": row['date'],
-                "secousse": row['secousse'],
-                "magnitude": row['magnitude'],
-                "tension_entre_plaque": row['tension entre plaque']
-            }
-            producer.send(topic_name, value=message)
-            print("Sent: {message}".format(message=message))
-            time.sleep(1)
+        message = {
+            "timestamp": datetime.now().isoformat(),
+            "price": round(random.uniform(20000, 60000), 2),
+            "volume": random.randint(1000, 5000),
+            "volatility": round(random.uniform(0.5, 5.0), 2)
+        }
+        
+        producer.send(topic_name, value=message)
+        print("Sent: {message}".format(message=message))
+        time.sleep(1)
+
 except KeyboardInterrupt:
     print("Stopping producer...")
 
