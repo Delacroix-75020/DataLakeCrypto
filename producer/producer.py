@@ -9,14 +9,14 @@ producer = KafkaProducer(
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
-topic_name = 'bitcoin_topic'
+topic_name = 'bitcointopic'
 
 try:
     while True:
         message = {
             "timestamp": datetime.now().isoformat(),
-            "buy_price": round(random.uniform(20000, 60000), 2),  # Cours à l'achat
-            "sell_price": round(random.uniform(20000, 60000), 2),  # Cours à la vente
+            "buy_price": round(random.uniform(20000, 60000), 2),
+            "sell_price": round(random.uniform(20000, 60000), 2),
             "volume": random.randint(1000, 5000),
             "volatility": round(random.uniform(0.5, 5.0), 2)
         }
