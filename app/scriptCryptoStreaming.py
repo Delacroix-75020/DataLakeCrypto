@@ -28,12 +28,13 @@ df = spark \
   .load()
 
 df = df.selectExpr("CAST(value AS STRING) as json_data")
-
 df = df.select(from_json(col("json_data"), schema).alias("data")).select("data.*")
 
 query = df.writeStream \
     .outputMode("append") \
-    .format("console") \
+    .format("json") \
+    .option("path", "/bitcoin/data/bitcoin_data") \
+    .option("checkpointLocation", "hdfs://namenode:9000/bitcoin/data/ii") \
     .start()
 
 query.awaitTermination()
