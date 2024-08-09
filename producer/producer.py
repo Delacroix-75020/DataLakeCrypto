@@ -15,7 +15,8 @@ try:
     while True:
         message = {
             "timestamp": datetime.now().isoformat(),
-            "price": round(random.uniform(20000, 60000), 2),
+            "buy_price": round(random.uniform(20000, 60000), 2),  # Cours à l'achat
+            "sell_price": round(random.uniform(20000, 60000), 2),  # Cours à la vente
             "volume": random.randint(1000, 5000),
             "volatility": round(random.uniform(0.5, 5.0), 2)
         }
