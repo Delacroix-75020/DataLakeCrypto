@@ -32,8 +32,8 @@ df = df.select(from_json(col("json_data"), schema).alias("data")).select("data.*
 
 query = df.writeStream \
     .outputMode("append") \
-    .format("json") \
-    .option("path", "/bitcoin/data/bitcoin_data") \
+    .format("csv") \
+    .option("path", "hdfs://namenode:9000/bitcoin/data/bitcoin_data") \
     .option("checkpointLocation", "hdfs://namenode:9000/bitcoin/data/ii") \
     .start()
 
