@@ -184,6 +184,10 @@ producer.close()
 
 ```
 
+## Producer Screenshots
+
+![App Screenshot](/simu.png)
+
 ## Consumer
 
 Ce script Python utilise Apache Spark pour consommer en temps réel les données de prix du Bitcoin à partir d'un topic Kafka, les traiter, et les stocker dans HDFS.
